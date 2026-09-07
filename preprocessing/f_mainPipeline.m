@@ -194,7 +194,8 @@ params = finputcheck( generalInput, {'BIDSmodality',        'string',           
                                     'finalSourceStepPath',  'string',                   '',         '';
                                     'runConnectivity',      'boolean',                  '',         true;
                                     'finalConnectStepPath', 'string',                   '',         '';
-                                    'runClassifier',        'boolean',                  '',         true
+                                    'runClassifier',        'boolean',                  '',         true;
+                                    'chanlocsFile',         'string',                   '',         ''
                                     } ...
                                     );
 if ischar(params) && startsWith(params, 'error:')
@@ -272,7 +273,7 @@ if params.runPrepro
     %Defines the preprocessing parameters (the rest of parameters will be defined with its corresponding f_main)
     preproInput = strcmp(varargin, 'initialSub') | strcmp(varargin, 'filterAndResample') | ...
         strcmp(varargin, 'newSR') | strcmp(varargin, 'freqRange') | ...
-        strcmp(varargin, 'reref_REST') | strcmp(varargin, 'onlyBlinks');
+        strcmp(varargin, 'reref_REST') | strcmp(varargin, 'onlyBlinks') | strcmp(varargin, 'chanlocsFile');
     
     
     %Executes the mainPrepro specified by the user, starting at the step desired

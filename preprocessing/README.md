@@ -8,6 +8,11 @@ This directory is dedicated to the sensor-space preprocessing, patient-control n
 
 The preprocessing pipeline comprises the following processing stages and outputs:
 
+### 0. Data Reordering & Coordinates (Phase 0)
+*   **Purpose**: Verify if raw EEG data has electrode labels. If missing, assign coordinates from templates or standard BioSemi lists (e.g. `Cap_coords_all.xlsx`) and format the output into BIDS structure.
+*   **Workflow**: Check labels in EEGLAB. If missing, find coordinates (e.g., from [BioSemi Downloads](https://www.biosemi.com/download.htm)). Run `mainReorderData.m` to generate the correct BIDS folder structure per subject.
+*   **Location**: This phase operates externally to the main pipeline (usually in `fase_0` folder) and outputs the raw `.set` files needed for Phase 1.
+
 ### 1. Preprocessing (`Preprocessing`)
 *   **Purpose**: Downsampling, filtering, artifact correction (ASR), independent component analysis (ICA), component rejection, and bad channel interpolation.
 *   **Input Files**: BIDS-structured raw data.
@@ -35,7 +40,8 @@ The overall processing flow is as follows:
 
 ```mermaid
 graph TD
-    A[BIDS Raw Data] --> B[Preprocessing: downsampling, filtering, ASR, ICA, interpolation]
+    Z[Raw EDF/BDF Data] --> |mainReorderData.m & Coordinates| A
+    A[BIDS Raw Data .set] --> B[Preprocessing: downsampling, filtering, ASR, ICA, interpolation]
     B --> C[Sensor-space Preprocessed .set]
     C --> D[Normalization: Z-scoring relative to healthy controls]
     D --> E[Sensor-space Normalized .set]
