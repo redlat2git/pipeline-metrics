@@ -4,7 +4,7 @@ This directory is dedicated to the sensor-space preprocessing, patient-control n
 
 ---
 
-## 📁 Stages & Outputs Overview
+## Stages & Outputs Overview
 
 The preprocessing pipeline comprises the following processing stages and outputs:
 
@@ -34,7 +34,7 @@ The preprocessing pipeline comprises the following processing stages and outputs
 
 ---
 
-## 🔄 Execution Workflow
+## Execution Workflow
 
 The overall processing flow is as follows:
 
@@ -51,7 +51,7 @@ graph TD
 
 ---
 
-## 🚀 How to Run Preprocessing in MATLAB
+## How to Run Preprocessing in MATLAB
 
 All stages of preprocessing, normalization, and source projection are orchestrated through MATLAB:
 
@@ -72,7 +72,13 @@ To run the preprocessing pipeline, a third-party user **MUST** install the follo
    *(If you installed them via MATLAB Add-Ons on Windows, they are typically located in `%APPDATA%\MathWorks\MATLAB Add-Ons\Collections\`)*.
 
 ### Step 3: Configure and Run the Orchestrator
-1. Open [runMainPipeline_.m](runMainPipeline_.m).
-2. The script is configured to use a **relative path** to locate the BIDS database automatically (`databasePath`). By default, it points to `../../2_prepro_analysis_brainlat`. Update this variable if your raw data folder has a different name or location.
-3. The output will automatically be saved into a new folder called **`salida/`** directly inside this `preprocessing/` directory.
-4. Execute `runMainPipeline_.m` in MATLAB.
+1. Open `runMainPipeline_.m` or create a similar batch script (like `run_turkey.m`).
+2. The script uses a **relative path** to locate the BIDS database automatically (`databasePath`). 
+3. If your EEG data does not have built-in coordinates (e.g., standard 10-20 system), you can pass a `.ced` or `.locs` file to the pipeline automatically using the `chanlocsFile` parameter in the `f_mainPipeline` call.
+   ```matlab
+   f_mainPipeline(databasePath, 'signalType', 'RS', 'runPrepro', true, ...
+       'newPath', 'salida_turquia', ...
+       'chanlocsFile', 'C:/path/to/your/IUEFM_additional.ced');
+   ```
+4. The pipeline uses MATLAB's `usejava('desktop')` to detect how it is being run. If run directly inside the MATLAB GUI window, it will prompt the user to manually select bad channels (Interactive/Manual mode). If run via command line batch mode (`matlab -batch "runMainPipeline_"`), it will execute fully automatically without any user prompts.
+5. The output will automatically be saved into the specified `newPath` folder.

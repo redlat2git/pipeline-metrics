@@ -4,7 +4,7 @@ This directory contains the code to extract frequency, complexity, aperiodic, an
 
 ---
 
-## ⚙️ Configuration (`config/config.json`)
+## Configuration (`config/config.json`)
 
 All stages are controlled by a central configuration file. Make sure to edit this file before running:
 
@@ -35,7 +35,7 @@ All stages are controlled by a central configuration file. Make sure to edit thi
 
 ---
 
-## 💻 Codebase Details
+## Codebase Details
 
 ### 1. MATLAB Scripts (`matlab/`)
 *   **[main_frecuency.m](matlab/main_frecuency.m)**: Calculates Relative Power Density (RPD) and Absolute Power (EPP) for canonical bands (Delta, Theta, Alpha 1, Alpha 2, Beta 1, Beta 2, Gamma, Total) and subject-specific bands (e.g., individual Alpha frequency peaks) across all channels/ROIs.
@@ -65,7 +65,7 @@ All stages are controlled by a central configuration file. Make sure to edit thi
 
 ---
 
-## 📊 Consolidated Master Output Tables
+## Consolidated Master Output Tables
 
 When feature consolidation runs, it creates a `Consolidated/` folder inside your country output directory with two main tables:
 
@@ -83,7 +83,7 @@ When feature consolidation runs, it creates a `Consolidated/` folder inside your
 
 ---
 
-## 🔍 How to Filter Consolidated Data in Pandas
+## How to Filter Consolidated Data in Pandas
 
 All columns in the master tables (except `Subject_ID`) are structured with a clear naming convention:
 `{Stage}_{FeatureType}_{Variable}`
